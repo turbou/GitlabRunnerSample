@@ -1,4 +1,4 @@
-# GitlabRunnerSample
+# GitlabRunnerデモ用サンプル
 Gitlab, Gitlab Runnerの環境構築用です。
 
 ## サービス構成
