@@ -1,0 +1,103 @@
+version: '3'
+
+networks:
+  fixed_compose_network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/24
+
+volumes:
+  postgres_data:
+    driver: local
+  maildir: {}
+
+services:
+  postgres:
+    image: postgres:12.11
+    container_name: contrast_gitlab_demo.postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./create_database.sh:/docker-entrypoint-initdb.d/create_database.sh
+      - /tmp:/tmp
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "password"
+    networks:
+      fixed_compose_network:
+        ipv4_address: 172.20.0.1
+
+  mail:
+    image: mailhog/mailhog:v1.0.1
+    container_name: contrast_gitlab_demo.mail
+    environment:
+      - TZ=Asia/Tokyo
+      - MH_UI_WEB_PATH=mail
+      - MH_STORAGE=maildir
+      - MH_MAILDIR_PATH=/tmp
+    volumes:
+      - maildir:/tmp
+    networks:
+      fixed_compose_network:
+        ipv4_address: 172.20.0.2
+
+  gitlab:
+    image: gitlab/gitlab-ce:15.1.0-ce.0
+    container_name: contrast_gitlab_demo.gitlab
+    depends_on:
+      - postgres
+      - mail
+    hostname: 'gitlab'
+    environment:
+      TZ: Asia/Tokyo
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://172.20.0.3:80/'
+        gitlab_rails['gitlab_shell_ssh_port'] = 22
+        gitlab_rails['initial_root_password'] = "password"
+        gitlab_rails['time_zone'] = 'Asia/Tokyo'
+        postgresql['enable'] = false
+        gitlab_rails['db_username'] = "gitlab"
+        gitlab_rails['db_password'] = "password"
+        gitlab_rails['db_host'] = "postgres"
+        gitlab_rails['db_port'] = "5432"
+        gitlab_rails['db_database'] = "gitlab"
+        gitlab_rails['db_adapter'] = 'postgresql'
+        gitlab_rails['db_encoding'] = 'utf8'
+        gitlab_rails['gitlab_email_from'] = 'oyoyo@contrastsecurity.com'
+        gitlab_rails['gitlab_email_reply_to'] = ''
+        gitlab_rails['smtp_enable'] = true
+        gitlab_rails['smtp_address'] = "mail"
+        gitlab_rails['smtp_port'] = 25
+        gitlab_rails['smtp_domain'] = "mail"
+        gitlab_rails['smtp_tls'] = false
+        gitlab_rails['smtp_enable_starttls_auto'] = true
+        gitlab_rails['smtp_authentication'] = "plain"
+        gitlab_rails['manage_backup_path'] = true
+        gitlab_rails['backup_path'] = "/var/opt/gitlab/backups"
+        gitlab_rails['backup_archive_permissions'] = 0644
+    ports:
+      - '8080:80'
+      - '2122:22'
+    expose:
+      - "443"
+    volumes:
+      - '/etc/localtime:/etc/localtime:ro'
+    networks:
+      fixed_compose_network:
+        ipv4_address: 172.20.0.3
+
+  gitlab-runner:
+    image: gitlab/gitlab-runner:v15.1.0
+    container_name: contrast_gitlab_demo.gitlab-runner
+    environment:
+      TZ: Asia/Tokyo
+    volumes:
+      - '/etc/localtime:/etc/localtime:ro'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    depends_on:
+      - gitlab
+    networks:
+      fixed_compose_network:
+        ipv4_address: 172.20.0.4
+
