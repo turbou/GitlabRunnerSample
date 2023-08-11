@@ -76,7 +76,7 @@ vi /etc/gitlab-runner/config.toml
   session_timeout = 1800
 
 [[runners]]
-  name = "contrast-runner"
+  name = "docker-runner"
   url = "http://172.20.0.2"
   token = "[REGISTRATION_TOKEN]"
   executor = "docker"
