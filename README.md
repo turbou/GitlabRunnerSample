@@ -32,14 +32,10 @@ apt-get install vim
 
 ## Gitlab Runnerの登録
 ### Gitlab Runnerの登録用トークンについて
-Gitlabのどの位置づけで、Gitlab Runnerを登録するかでトークンの取得場所が異なります。  
-- システムレベルの場合  
-  *Admin Area> Runners*  
-  **Register an Instance Runner**
-- プロジェクトレベルの場合  
-  各プロジェクトの *Settings> CI/CD*
+*Admin Area> Runners*  
+**Register an Instance Runner**
 
-その他、グループレベルなどありますが、適宜選択してください。  
+その他にグループレベル、プロジェクトレベルでRunnerを登録することもできます。適宜、環境や状況に合わせて選択してください。  
 
 ### Gitlab Runnerの登録
 ```bash
