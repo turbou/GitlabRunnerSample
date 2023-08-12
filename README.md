@@ -19,6 +19,10 @@ docker-compose pull
 # コンテナ起動
 docker-compose up -d
 ```
+## Gitlabに接続
+http://localhost:8080/ で接続します。  
+root/passwordでログインします。
+
 ### Gitlab Runnerコンテナに必要なソフトウェアインストール
 ```bash
 # Gitlab Runnerのコンテナに入ります。
@@ -58,7 +62,7 @@ docker exec -it contrast_gitlab_demo.gitlab-runner bash
 ```
 コンテナ内で
 ```bash
-vi /etc/gitlab-runner/config.toml
+vim /etc/gitlab-runner/config.toml
 ```
 以下３つを追加または変更します。
 - clone_url  
