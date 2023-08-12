@@ -4,13 +4,13 @@ Gitlab, Gitlab Runnerの環境構築用です。
 ## サービス構成
 GitlabとGitlab Runnerを連携させるために各コンテナを固定IPで起動します。
 - Postgres  
-  172.20.0.1
-- Mail  
   172.20.0.2
-- Gitlab  
+- Mail  
   172.20.0.3
-- Gitlab Runner  
+- Gitlab  
   172.20.0.4
+- Gitlab Runner  
+  172.20.0.5
 
 ## コンテナ起動
 ```bash
@@ -45,7 +45,7 @@ docker exec -it contrast_gitlab_demo.gitlab-runner bash
 コンテナ内で
 ```bash
 gitlab-runner register -n \
-  --url http://172.20.0.3 \
+  --url http://172.20.0.4 \
   --registration-token [REGISTRATION_TOKEN] \
   --executor "docker" \
   --docker-image alpine:latest \
@@ -73,7 +73,7 @@ vi /etc/gitlab-runner/config.toml
 
 [[runners]]
   name = "docker-runner"
-  url = "http://172.20.0.3"
+  url = "http://172.20.0.4"
   token = "[REGISTRATION_TOKEN]"
   executor = "docker"
   clone_url = "http://gitlab/" # これを追加します。
