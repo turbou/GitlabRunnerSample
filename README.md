@@ -72,6 +72,9 @@ vim /etc/gitlab-runner/config.toml
 - volumes  
   ```/var/run/docker.sock:/var/run/docker.sock```を値として追加します。
 ```toml
+concurrent = 1
+check_interval = 0
+
 [session_server]
   session_timeout = 1800
 
