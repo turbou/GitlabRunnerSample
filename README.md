@@ -45,7 +45,7 @@ docker exec -it contrast_gitlab_demo.gitlab-runner bash
 コンテナ内で
 ```bash
 gitlab-runner register -n \
-  --url http://172.20.0.2 \
+  --url http://172.20.0.3 \
   --registration-token [REGISTRATION_TOKEN] \
   --executor "docker" \
   --docker-image alpine:latest \
@@ -73,7 +73,7 @@ vi /etc/gitlab-runner/config.toml
 
 [[runners]]
   name = "docker-runner"
-  url = "http://172.20.0.2"
+  url = "http://172.20.0.3"
   token = "[REGISTRATION_TOKEN]"
   executor = "docker"
   clone_url = "http://gitlab/" # これを追加します。
