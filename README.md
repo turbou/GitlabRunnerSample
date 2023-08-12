@@ -68,7 +68,8 @@ vim /etc/gitlab-runner/config.toml
 - clone_url  
   コンテナ間通信のためdocker-compose.yml内での名前を指定します。
 - network_mode  
-  ネットワーク名は```docker network ls```で確認してください。
+  ネットワーク名は```docker network ls```で確認してください。  
+  これは実施している環境（ディレクトリ）によって接頭辞が変わります。
 - volumes  
   ```/var/run/docker.sock:/var/run/docker.sock```を値として追加します。
 ```toml
@@ -90,7 +91,7 @@ check_interval = 0
     [runners.cache.gcs]
     [runners.cache.azure]
   [runners.docker]
-    network_mode = "gitlab_fixed_compose_network" # これを追加します。
+    network_mode = "gitlabrunnersample_fixed_compose_network" # これを追加します。
     tls_verify = false
     image = "alpine:latest"
     privileged = false
