@@ -26,7 +26,7 @@ services:
       POSTGRES_PASSWORD: "password"
     networks:
       fixed_compose_network:
-        ipv4_address: 172.20.0.1
+        ipv4_address: 172.20.0.2
 
   mail:
     image: mailhog/mailhog:v1.0.1
@@ -40,7 +40,7 @@ services:
       - maildir:/tmp
     networks:
       fixed_compose_network:
-        ipv4_address: 172.20.0.2
+        ipv4_address: 172.20.0.3
 
   gitlab:
     image: gitlab/gitlab-ce:15.1.0-ce.0
@@ -85,7 +85,7 @@ services:
       - '/etc/localtime:/etc/localtime:ro'
     networks:
       fixed_compose_network:
-        ipv4_address: 172.20.0.3
+        ipv4_address: 172.20.0.4
 
   gitlab-runner:
     image: gitlab/gitlab-runner:v15.1.0
@@ -99,5 +99,5 @@ services:
       - gitlab
     networks:
       fixed_compose_network:
-        ipv4_address: 172.20.0.4
+        ipv4_address: 172.20.0.5
 
