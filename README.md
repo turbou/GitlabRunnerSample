@@ -101,3 +101,6 @@ check_interval = 0
     volumes = ["/var/run/docker.sock:/var/run/docker.sock", "/cache"] # 値を変更します。
     shm_size = 0
 ```
+
+あとはGitlabのRunnerのところで、Gitlab Runnerが登録されていることを確認します。
+
