@@ -12,17 +12,14 @@ GitlabとGitlab Runnerを連携させるために各コンテナを固定IPで�
 - Gitlab Runner  
   172.20.0.5
 
-## コンテナ起動
+## コンテナ起動と初期セットアップ
+### コンテナ起動
 ```bash
 # いきなりupでもよいですが、念のため
 docker-compose pull
 # コンテナ起動
 docker-compose up -d
 ```
-## Gitlabに接続
-http://localhost:8080/ で接続します。  
-root/passwordでログインします。
-
 ### Gitlab Runnerコンテナに必要なソフトウェアインストール
 ```bash
 # Gitlab Runnerのコンテナに入ります。
@@ -33,6 +30,9 @@ docker exec -it contrast_gitlab_demo.gitlab-runner bash
 apt-get update
 apt-get install vim
 ```
+## Gitlabに接続
+http://localhost:8080/ で接続します。  
+root/passwordでログインします。
 
 ## Gitlab Runnerの登録
 ### Gitlab Runnerの登録用トークンについて
