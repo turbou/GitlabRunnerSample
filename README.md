@@ -104,3 +104,9 @@ check_interval = 0
 
 あとはGitlabのRunnerのところで、Gitlab Runnerが登録されていることを確認します。
 
+## 後片付け
+### コンテナ停止
+```bash
+# ボリュームも一緒に削除する場合
+doker-compose down --volumes
+```
