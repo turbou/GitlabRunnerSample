@@ -28,7 +28,7 @@ docker exec -it contrast_gitlab_demo.gitlab-runner bash
 コンテナ内で
 ```bash
 apt-get update
-apt-get install vim
+apt-get install -y vim
 ```
 ## Gitlabに接続
 http://localhost:8080/ で接続します。  
