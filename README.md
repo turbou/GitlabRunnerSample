@@ -107,12 +107,15 @@ check_interval = 0
 ## 補足
 ### Gitlabのポート番号を変える（8080->8081など）などでdown, up後にAdmin>Runnersで500エラーで同しようもないとき
 ```bash
-gitlab-rails console
-> ApplicationSetting.first.delete
-> ApplicationSetting.first
-=> nill
+gitlab-rails dbconsole --db main
 ```
-してから、```docker-compose restart gitlab```すると解決するかもしれません。
+```sql
+gitlab=> UPDATE projects SET runners_token = null, runners_token_encrypted = null;
+gitlab=> UPDATE projects SET runners_token = null, runners_token_encrypted = null;
+gitlab=> UPDATE namespaces SET runners_token = null, runners_token_encrypted = null;
+gitlab=> UPDATE application_settings SET runners_registration_token_encrypted = null;
+gitlab=> UPDATE ci_runners SET token = null, token_encrypted = null;
+```
 
 ## 後片付け
 ### コンテナ停止
