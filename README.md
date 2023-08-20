@@ -104,6 +104,16 @@ check_interval = 0
 
 あとはGitlabのRunnerのところで、Gitlab Runnerが登録されていることを確認します。
 
+## 補足
+### Gitlabのポート番号を変える（8080->8081など）などでdown, up後にAdmin>Runnersで500エラーで同しようもないとき
+```bash
+gitlab-rails console
+> ApplicationSetting.first.delete
+> ApplicationSetting.first
+=> nill
+```
+してから、```docker-compose restart gitlab```すると解決するかもしれません。
+
 ## 後片付け
 ### コンテナ停止
 ```bash
