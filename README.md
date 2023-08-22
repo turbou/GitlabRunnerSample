@@ -72,6 +72,8 @@ vim /etc/gitlab-runner/config.toml
   これは実施している環境（ディレクトリ）によって接頭辞が変わります。
 - volumes  
   ```/var/run/docker.sock:/var/run/docker.sock```を値として追加します。
+- pull_policy  
+  ```if-not-present```を設定します。これによってホストにあるDockerイメージをpullすることができます。
 ```toml
 concurrent = 1
 check_interval = 0
@@ -100,6 +102,7 @@ check_interval = 0
     disable_cache = false
     volumes = ["/var/run/docker.sock:/var/run/docker.sock", "/cache"] # 値を変更します。
     shm_size = 0
+    pull_policy = "if-not-present"
 ```
 
 あとはGitlabのRunnerのところで、Gitlab Runnerが登録されていることを確認します。
