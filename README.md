@@ -64,7 +64,7 @@ docker exec -it contrast_gitlab_demo.gitlab-runner bash
 ```bash
 vim /etc/gitlab-runner/config.toml
 ```
-**以下３つを追加または変更します。**
+**以下4つを追加または変更します。**
 - clone_url  
   コンテナ間通信のためdocker-compose.yml内での名前を指定します。
 - network_mode  
