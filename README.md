@@ -39,6 +39,7 @@ root/passwordでログインします。
 *Admin Area> Runners*  
 **Register an Instance Runner**
 
+**500エラーが出てしまう場合はページ最下部の補足を参照してください。**  
 その他にグループレベル、プロジェクトレベルでRunnerを登録することもできます。適宜、環境や状況に合わせて選択してください。  
 
 ### Gitlab Runnerの登録
