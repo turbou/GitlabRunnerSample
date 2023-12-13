@@ -108,7 +108,7 @@ check_interval = 0
 あとはGitlabのRunnerのところで、Gitlab Runnerが登録されていることを確認します。
 
 ## 補足
-### Gitlabのポート番号を変える（8080->8081など）などでdown, up後にAdmin>Runnersで500エラーで同しようもないとき
+### Gitlabのポート番号を変える（8080->8081など）などでdown, up後にAdmin>Runnersで500エラーでどうしようもない時
 ```bash
 gitlab-rails dbconsole --db main
 ```
