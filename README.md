@@ -103,7 +103,7 @@ check_interval = 0
     disable_cache = false
     volumes = ["/var/run/docker.sock:/var/run/docker.sock", "/cache"] # 値を変更します。
     shm_size = 0
-    pull_policy = "if-not-present"
+    pull_policy = "if-not-present" # これを追加します。
 ```
 
 あとはGitlabのRunnerのところで、Gitlab Runnerが登録されていることを確認します。
